@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Vending Machine</title>
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
+    </head>
+
+    <body>
+        <div id="root"></div>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/react/17.0.2/umd/react.development.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/17.0.2/umd/react-dom.development.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
+
+        <script type="text/babel">
+            const data = [
+                {
+                    id: 1,
+                    name: "可樂",
+                    price: 20,
+                    productImageUrl: ""
+                },
+                {
+                    id: 2,
+                    name: "雪碧",
+                    price: 18,
+                    productImageUrl: ""
+                },
+                {
+                    id: 3,
+                    name: "芬達",
+                    price: 22,
+                    productImageUrl: ""
+                },
+                {
+                    id: 4,
+                    name: "可樂",
+                    price: 20,
+                    productImageUrl: ""
+                },
+                {
+                    id: 5,
+                    name: "可樂Zero",
+                    price: 25,
+                    productImageUrl: ""
+                },
+                {
+                    id: 6,
+                    name: "咖啡",
+                    price: 60,
+                    productImageUrl: ""
+                },
+                {
+                    id: 7,
+                    name: "拿鐵",
+                    price: 80,
+                    productImageUrl: ""
+                },
+                {
+                    id: 8,
+                    name: "燕麥拿鐵",
+                    price: 100,
+                    productImageUrl: ""
+                }
+            ];
+
+            const VendingMachine = () => {
+                const [moneyInserted, setMoneyInserted] = React.useState(0);
+                const [change, setChange] = React.useState(0);
+                const [selectedProduct, setSelectedProduct] = React.useState(null);
+
+                const handleInsertMoney = (event) => {
+                    setMoneyInserted(parseInt(event.target.value));
+                    setSelectedProduct(null);
+                };
+
+                const handlePurchase = (price) => {
+                    if (moneyInserted === price) {
+                        setChange(0);
+                        setMoneyInserted(0);
+                        console.log("Product dropped!");
+                    } else if (moneyInserted > price) {
+                        const remainingChange = moneyInserted - price;
+                        setChange(remainingChange);
+                        setMoneyInserted(0);
+                        console.log("Product dropped! Change returned:", remainingChange);
+                    } else {
+                        console.log("Insufficient funds!");
+                    }
+                };
+
+                const handleRefund = () => {
+                    setChange(0);
+                    setMoneyInserted(0);
+                    console.log("Refund issued!");
+                };
+
+                return (
+                    <div className="container">
+                        <h1>Vending Machine</h1>
+                        <div className="row">
+                            <div className="col">
+                                <input
+                                    type="number"
+                                    className="form-control mb-3"
+                                    placeholder="Insert money"
+                                    value={moneyInserted}
+                                    onChange={handleInsertMoney}
+                                />
+                            </div>
+                        </div>
+                        <div className="row">
+                            {data.map(item => (
+                                <div className="col" key={item.id}>
+                                    <button
+                                        className={`btn btn-primary me-2 mb-2 ${selectedProduct === item.id ? 'active' : ''}`}
+                                        onClick={() => setSelectedProduct(item.id)}
+                                    >
+                                        {item.name} - ${item.price}
+                                    </button>
+                                </div>
+                            ))}
+                        </div>
+                        <div className="row mt-3">
+                            <div className="col">
+                                <button className="btn btn-danger" onClick={handleRefund}>Refund</button>
+                            </div>
+                        </div>
+                        <p className="mt-3">Change: ${change}</p>
+                    </div>
+                );
+            };
+
+            ReactDOM.render(<VendingMachine />, document.getElementById('root'));
+        </script>
+    </body>
+
+</html>
