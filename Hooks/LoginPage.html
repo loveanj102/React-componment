@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <title>React 與表單元素</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <script src="../javascripts/vendor.js"></script>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/redux/4.2.0/redux.min.js"
+      integrity="sha512-1/8Tj23BRrWnKZXeBruk6wTnsMJbi/lJsk9bsRgVwb6j5q39n0A00gFjbCTaDo5l5XrPVv4DZXftrJExhRF/Ug=="
+      crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  </head>
+
+  <body class="bg-lighter">
+    <div class="container main my-5">
+      <div class="row">
+        <main class="col post">
+          <!-- 章節標題 -->
+          <div class="mb-4">
+            <h1 class="mt-0 text-muted">會員登入頁面</h1><small>檔名：<code>reactForm.html</code></small>
+          </div>
+          <!-- 🔥🔥練習開始🔥🔥 -->
+          <div id="root"></div>
+          <script type="text/babel">
+
+            const { useState } = React
+
+            const App = () => {
+              const [username, setUsername] = useState('');
+              const [password, setPassword] = useState('');
+              const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+              // 登入函數
+              const handleLogin = () => {
+                // 在這裡你可以加入登入驗證邏輯，例如檢查用戶名和密碼是否正確
+                // 這裡簡單示範：如果用戶名和密碼不為空，就假設登入成功
+                if (username !== '' && password !== '') {
+                  setIsLoggedIn(true);
+                } else {
+                  alert('請輸入用戶名和密碼');
+                }
+              };
+
+              // 登出函數
+              const handleLogout = () => {
+                setIsLoggedIn(false);
+                setUsername('');
+                setPassword('');
+              };
+
+
+
+              return (<div>
+                {isLoggedIn ? (
+                  // 如果已登入，顯示登出頁面
+                  <div>
+                    <h1>歡迎回來，{username}！</h1>
+                    <button onClick={handleLogout}>登出</button>
+                  </div>
+                ) : (
+                  // 如果未登入，顯示登入表單
+                  <div>
+                    <h1>會員登入</h1>
+                    <label>用戶名：</label>
+                    <input
+                      type="text"
+                      value={username}
+                      onChange={(e) => setUsername(e.target.value)}
+                    />
+                    <br />
+                    <label>密碼：</label>
+                    <input
+                      type="password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                    />
+                    <br />
+                    <button onClick={handleLogin}>登入</button>
+                  </div>
+                )}
+              </div>
+              )
+            }
+
+            ReactDOM.createRoot(document.querySelector('#root'))
+              .render(<App />)
+          </script>
+          <!-- 🙇🙇練習結束🙇🙇 -->
+        </main>
+
+
+
+      </div>
+    </div>
+
+    <nav class="navbar fixed-top navbar-expand-sm navbar-dark bg-secondary">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/ReactComp">Nikki React</a>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link " href="/todoList.html">ToDo List</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link " href="/VendingMachine.html">販賣機</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link " href="/Hooks/LoginPage.html">登入</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <footer class="footer py-2 bg-light">
+      <div class="container text-center">
+        <small class="text-black-50 fw-light mb-0">CpoyRight By Nikki @Départ Studio</small>
+      </div>
+    </footer>
+    <link rel="stylesheet" href="../stylesheets/all.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+  </body>
+
+</html>
