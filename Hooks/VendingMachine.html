@@ -47,7 +47,21 @@
         <main class="col post">
           <!-- 章節標題 -->
           <div class="mb-4">
-            <h1 class="mt-0 text-muted">React自動販賣機</h1>
+            <h4 class="mt-0 text-muted">React自動販賣機</h4>
+            <p class="mt-0 text-muted">
+              請輸入投入金額，並選取欲購買的商品<br />
+              <br />
+              基本邏輯概念如下：<br />
+              1.簡單使用useState儲存商品資料以及狀態，<br />
+              2. 每個商品皆有一個按鈕 (按鈕可觸發購買）=> (selectedProduct) , Fn (handlePurchase)<br />
+              3. 當投入金額（是一個input可輸入金額）=>(moneyInserted)，相對應商品按鈕亮起 =>(if moneyInserted === price ?:)/ button color
+              change<br />
+              4. 當消費者按下按鈕時 => Fn (handlePurchase)<br />
+              判斷：<br />
+              如果投入金額等於商品金額，商品掉落 => result<br />
+              如果投入金額大於商品金額，商品掉落之外，還會找回剩餘零錢 => result && (handleRefund)<br />
+              -如果投入金額小於任何商品金額，無法購買，按下退款鍵，找回投入零錢 => (handleRefund)<br />
+            </p>
           </div>
           <!-- 🔥🔥練習開始🔥🔥 -->
 
@@ -213,19 +227,19 @@
       </div>
     </div>
 
-    <nav class="navbar fixed-top navbar-expand-sm navbar-dark bg-secondary">
+    <nav class="navbar fixed-top navbar-expand-sm navbar-dark nav-bg">
       <div class="container-fluid">
-        <a class="navbar-brand" href="/ReactComp">Nikki React</a>
+        <a class="navbar-brand" href="/ReactComp">React小工具</a>
         <div class="collapse navbar-collapse" id="navbarCollapse">
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="nav-link " href="/ReactComp/Hooks/todoList.html">ToDo List</a>
+              <a class="nav-link " href="Hooks/todoList.html">ToDo List</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link " href="/ReactComp/Hooks/VendingMachine.html">販賣機</a>
+              <a class="nav-link " href="Hooks/VendingMachine.html">販賣機</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link " href="/ReactComp/Hooks/LoginPage.html">登入</a>
+              <a class="nav-link " href="Hooks/LoginPage.html">登入</a>
             </li>
           </ul>
         </div>
@@ -238,6 +252,7 @@
       </div>
     </footer>
     <link rel="stylesheet" href="../stylesheets/all.css">
+    <link rel="stylesheet" href="../stylesheets/custom.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
   </body>
 
